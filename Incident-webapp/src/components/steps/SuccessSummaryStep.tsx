@@ -4,9 +4,10 @@ import type { WizardData } from '../IncidentWizard';
 interface SuccessSummaryStepProps {
   wizardData: WizardData;
   onRestart: () => void;
+  onBackToHome?: () => void;
 }
 
-export default function SuccessSummaryStep({ wizardData, onRestart }: SuccessSummaryStepProps) {
+export default function SuccessSummaryStep({ wizardData, onRestart, onBackToHome }: SuccessSummaryStepProps) {
   const { incidentData, pdfBytes, storachaCID, contractData } = wizardData;
 
   const handleDownloadPDF = () => {
@@ -209,8 +210,17 @@ export default function SuccessSummaryStep({ wizardData, onRestart }: SuccessSum
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-4 focus:ring-blue-300 flex items-center justify-center space-x-2"
         >
           <RotateCcw className="w-5 h-5" />
-          <span>Report New Incident</span>
+          <span>Report Another Incident</span>
         </button>
+
+        {onBackToHome && (
+          <button
+            onClick={onBackToHome}
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-sm hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-4 focus:ring-green-300 flex items-center justify-center space-x-2"
+          >
+            <span>Back to Home</span>
+          </button>
+        )}
       </div>
 
       {/* Footer Note */}

@@ -1,7 +1,7 @@
-import IncidentWizard from './components/IncidentWizard';
+import IncidentManager from './components/IncidentManager';
 
 function App() {
-  return <IncidentWizard />;
+  return <IncidentManager />;
 }
 
 export default App;

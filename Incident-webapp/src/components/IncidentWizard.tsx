@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronRight, CheckCircle } from 'lucide-react';
+import { ChevronRight, CheckCircle, ArrowLeft } from 'lucide-react';
 import IncidentFormStep from './steps/IncidentFormStep';
 import PDFGenerationStep from './steps/PDFGenerationStep';
 import StorageUploadStep from './steps/StorageUploadStep';
@@ -28,7 +28,7 @@ const STEPS = [
   { id: 5, title: 'Complete', description: 'View summary' }
 ];
 
-export default function IncidentWizard() {
+export default function IncidentWizard({ onBackToHome }: { onBackToHome?: () => void }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [wizardData, setWizardData] = useState<WizardData>({
     incidentData: {
@@ -125,6 +125,7 @@ export default function IncidentWizard() {
                 contractData: null
               });
             }}
+            onBackToHome={onBackToHome}
           />
         );
       default:
@@ -137,12 +138,26 @@ export default function IncidentWizard() {
       {/* Header */}
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
-          <h1 className="text-2xl font-bold text-gray-900 text-center">
-            Incident Management System
-          </h1>
-          <p className="text-gray-600 text-sm mt-1 text-center">
-            Professional incident reporting with blockchain verification
-          </p>
+          <div className="flex items-center justify-between">
+            {onBackToHome && (
+              <button
+                onClick={onBackToHome}
+                className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span>Back to Home</span>
+              </button>
+            )}
+            <div className="flex-1 text-center">
+              <h1 className="text-2xl font-bold text-gray-900">
+                Incident Management System
+              </h1>
+              <p className="text-gray-600 text-sm mt-1">
+                Professional incident reporting with blockchain verification
+              </p>
+            </div>
+            {onBackToHome && <div className="w-28"></div>} {/* Spacer for centering */}
+          </div>
         </div>
       </header>
 
